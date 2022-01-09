@@ -48,6 +48,7 @@ STEPS AFTER DOWNLOADING THE CODE
     >>db.session.commit()
 
 6. Now make registrations and manage them from the admin panel
+
     ID:ecopark
     
     PASSWORD:Afbcx2mv
