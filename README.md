@@ -51,7 +51,7 @@ STEPS AFTER DOWNLOADING THE CODE
 
     ID:ecopark
     
-    PASSWORD:Afbcx2mv
+    PASSWORD:123
 
 You are good to go now
 
