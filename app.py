@@ -732,7 +732,7 @@ def pay():
         return redirect('/login')
     if "recharge" not in session:
         return redirect('/wallet')
-    client = razorpay.Client(auth= ("rzp_test_BRaMCabfn2AraG","eZCAXHrfSMC4IJk0enUlJGUf"))
+    client = razorpay.Client(auth= ("YOUR RAZORPAY CRED","YOUR RAZORPAY CRED"))
     amount = session["recharge"]
     amount = amount+"00"
     payment = client.order.create({'amount' : int(amount),'currency' : 'INR' , 'payment_capture': '1'})
