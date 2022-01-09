@@ -57,63 +57,84 @@ You are good to go now
 
 SAMPLE SCREENSHOTS
 1. SIGNUP
+
 ![image](https://user-images.githubusercontent.com/95869837/148690710-df06fff5-629e-4719-9dda-7893f8167431.png)
 
 2.OTP
+
 ![image](https://user-images.githubusercontent.com/95869837/148690718-2e618887-a4d4-4efe-ba12-a1036bcb1dc6.png)
 
 3.Registration
+
 ![image](https://user-images.githubusercontent.com/95869837/148690779-b4b9fcd2-2e4d-46fd-8f98-49a5d6f57348.png)
 ![image](https://user-images.githubusercontent.com/95869837/148690828-46be1de9-5151-4a93-8515-0bee6b1716be.png)
 
 4.Waiting page
+
 ![image](https://user-images.githubusercontent.com/95869837/148690846-140d9d1d-e8c9-4396-8f12-8f48d88de0ce.png)
 
 5.Navbar
+
 ![image](https://user-images.githubusercontent.com/95869837/148690858-a218157a-1ddc-4af4-bcaf-483b7b13b79a.png)
 
 6.Privacy policy
+
 ![image](https://user-images.githubusercontent.com/95869837/148690867-3bb2f0df-9bc9-4d2a-ab67-b92f64de0951.png)
 
 6.Terms of services
+
 ![image](https://user-images.githubusercontent.com/95869837/148690871-0ac90091-6515-4ef7-9914-f74b8e3d930d.png)
+
 ![image](https://user-images.githubusercontent.com/95869837/148690876-74d41ea6-fb57-4ad7-9a72-3c57dba50aaa.png)
 
 7.Account settings
+
 ![image](https://user-images.githubusercontent.com/95869837/148690889-d7185b54-34a5-4643-a0d5-e58b78edaf65.png)
 
 
 8.Wallet
+
 ![image](https://user-images.githubusercontent.com/95869837/148690900-8f5a10f3-bc4b-4591-9e4a-7841f4556214.png)
 
 9. Payment Gateway
+
 ![image](https://user-images.githubusercontent.com/95869837/148690933-7583519c-99ed-4251-b3bc-aa16898cb298.png)
+
 ![image](https://user-images.githubusercontent.com/95869837/148690956-f7f8d876-ba68-4db0-9f41-77805383fda4.png)
+
 ![image](https://user-images.githubusercontent.com/95869837/148690963-20cc1f82-827e-4b69-9485-bfe530b3aa3e.png)
+
 ![image](https://user-images.githubusercontent.com/95869837/148690976-417ac23b-315e-4f85-a27f-01a94c77bc6f.png)
 
 
 10.Dashboard
+
 ![image](https://user-images.githubusercontent.com/95869837/148690988-5ba69cc5-b612-43eb-947a-ef0b8065f353.png)
 
 
 11. Shortest route
+
 ![image](https://user-images.githubusercontent.com/95869837/148691018-aa987565-864b-48a1-a66f-8754623da931.png)
 
 
 12.Select plan
+
 ![image](https://user-images.githubusercontent.com/95869837/148691037-e197b07d-6aca-48ed-a656-57cae077a8d7.png)
 
 
 13.Select time and pay from wallet
+
 ![image](https://user-images.githubusercontent.com/95869837/148691051-74245ef6-21a2-4e44-aaf6-e01ae7c974c4.png)
+
 ![image](https://user-images.githubusercontent.com/95869837/148691059-2d0d16f2-7604-445d-9356-50cb50701e7d.png)
 
 
 14.Dashboard after booking
+
 ![image](https://user-images.githubusercontent.com/95869837/148691067-8346d299-7a8b-41c9-b825-e8f6e133418e.png)
 
 15.History
+
 ![image](https://user-images.githubusercontent.com/95869837/148691077-051c4723-c88a-4352-80d8-3a48a7a06532.png)
 
 
