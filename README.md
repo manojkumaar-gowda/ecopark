@@ -12,7 +12,7 @@ STEPS AFTER DOWNLOADING THE CODE
    ![image](https://user-images.githubusercontent.com/95869837/148689508-e133bbc1-1d47-464b-b40f-0d6870e1f15e.png)
 
        
-2. edit the italic url whatsapp://send?text=_https://ecoparkapp.herokuapp.com/_static/app_download/ecopark.apk everywhere to your desired web hosted url
+2. edit the url whatsapp://send?text=https://ecoparkapp.herokuapp.com/static/app_download/ecopark.apk everywhere to your desired web hosted url
     Make sure it points to the apk file.
 3. Create a free account in fast2sms.com. You will be credited with 50 rs as an entry credit. Copy the api key and paste it in app.py at YOUR FAST2SMS KEY
 ![image](https://user-images.githubusercontent.com/95869837/148689447-3c87d2b4-19eb-4074-b7b0-9bcc4a2974c1.png)
