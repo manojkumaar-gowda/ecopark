@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ecopark | Admin Login</title>
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/ecopark_favicon.png') }}">
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Materialize css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <!-- ****** -->
+</head>
+<body>
+    <div class="container overall_cont" style="margin-top:10%">
+        <div class="row">
+            <div class="col cont1">
+                <img src="{{ url_for('static', filename='images/admin_login.png') }}" alt="Login image" style="width:100%">
+            </div>
+            <div class="col cont2">
+                <h1 style="color:#92E3A9">Admin Login</h1>
+                <form action="" method="post">
+                    <div class="form-group">
+                      <label for="emp_id">Admin ID:</label>
+                      <input type="text" class="form-control" id="emp_id" placeholder="Enter ID" name="emp_id" autocomplete="off" value="{{emp_id}}">
+                    </div>
+                    <div class="form-group">
+                      <label for="pwd">Password:</label>
+                      <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pswd" value="{{pwd}}" autocomplete="off">
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary" style="background-color: #92E3A9;color:black">Submit</button>
+                </form>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col"></div>
+            <div class="col"></div>
+            <div class="col"></div>
+            <div class="col">
+                <img src="{{ url_for('static', filename='images/ecopark_favicon.png') }}" alt="Ecopark" style="width:40%;float:right">
+            </div>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    {% if message %}
+        <script>M.toast({html: '{{message}}'})</script>
+    {% endif %}
+</body>
+</html>

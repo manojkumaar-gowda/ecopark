@@ -1,0 +1,99 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;400&family=Quicksand:wght@300;400;500&family=Raleway:wght@300;400&family=Zen+Kaku+Gothic+New:wght@300&display=swap');
+*{
+    font-family: 'Quicksand', sans-serif;
+    font-weight:300;
+    text-decoration: none;
+}
+input:focus {
+    border-bottom: 1px solid #FF725E !important;
+    box-shadow: 0 1px 0 0 #FF725E !important;
+}
+button:focus{
+    background-color: #FF725E !important;
+}
+a{
+    text-decoration: none !important;
+}
+label.active {
+    color: #FF725E !important;
+}
+header, main, footer {
+    padding-left: 300px;
+}
+@media only screen and (max-width : 992px) {
+    header, main, footer {
+        padding-left: 0;
+    }
+}
+.profile_cover_image{
+    width:100%;
+}
+.sidenav{
+    width:70%;
+}
+.nav_footer{
+    position: absolute;
+    margin-left:15%;
+    bottom:10%;
+    
+}
+.active{
+    background-color: grey;
+}
+.top{
+    margin-top:5%;
+    align-items: center;
+}
+.user{
+    margin-left: 5%;
+    width:80%;
+}
+.ecopark_horizontal{
+    display: inline-block;
+    width:70%;
+}
+.wallet_img{
+    width:100%;
+    margin-top:30%
+}
+.proceed_to_pay{
+    width:100;
+    text-align:center;
+    padding:10px 28%;
+    border-radius:50px;
+    color:white;
+    border: none;
+    background-color: #FF725E;
+}
+.recommended_amount{
+    display: inline;
+    margin-right:2px;
+    border:1px solid #FF725E;
+    background-color: white;
+    padding:2px 20px;
+}
+.recommended_amount:active{
+    display: inline;
+    margin-right:2px;
+    border:1px solid #FF725E;
+    background-color: #FF725E;
+    padding:2px 20px;
+}
+.recommendation{
+    margin-bottom:5%;
+}
+.balance{
+    color: #D92828;
+    width:98% !important;
+    border-bottom: 1px solid grey !important;
+    box-shadow: 0 1px 0 0 none !important;
+}
+.low_bal_text{
+    color:black;
+}
+.recharge{
+    border:1px solid #FF725E !important;
+    width:95% !important;
+    padding-left:10px !important ;
+}

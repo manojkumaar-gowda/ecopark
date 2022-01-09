@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/ecopark_favicon.png') }}">
+    <title>ecopark | We request your patience</title>
+    <!-- CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/wait.css') }}">
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- Materialize css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <!-- No Zoom -->
+    <meta name="viewport" content= "width=device-width, user-scalable=no">
+</head>
+<body style="-moz-user-select: none; -webkit-user-select: none; -ms-user-select:none; user-select:none;-o-user-select:none;" unselectable="on" onselectstart="return false;" onmousedown="return false;">
+    <!-- Preloader start -->
+        <div id="preloader" style="background-color: white;position: absolute;z-index:999999;height: 100%;width:100%">
+            <img src="{{ url_for('static', filename='images/preloader.gif') }}" alt="preloader"  style="width:100%;margin: 0;position: absolute;top: 50%;left: 50%;-ms-transform: translate(-50%, -50%);transform: translate(-50%, -50%);">
+        </div>
+        <script>
+            $(document).ready(function(){
+                $("#preloader").hide();
+            });
+        </script>
+    <!-- Preloader end -->
+    <div class="wait_container">
+        <img src="{{ url_for('static', filename='images/wait.gif') }}" alt="Wait Patiently" class="wait_img">
+        <p class="wait_text">We have heard you calling us. We are actively working on your account. Your profile will be activated within 24 hours</p>
+    </div>
+    <div class="footer_logo_container">
+        <div class="row">
+            <div class="col-3"></div>
+            <div class="col-3"></div>
+            <div class="col-6"><img src="{{ url_for('static', filename='images/ecopark.png') }}" alt="ecopark" class="ecopark_logo"></div>
+        </div>
+    </div>
+    
+    <script>M.toast({html: 'Your Account has been successfully created. We request your patience for activation'})</script>
+</body>
+</html>

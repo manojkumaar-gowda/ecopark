@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ecopark | Arrival</title>
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/ecopark_favicon.png') }}">
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Materialize css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <!-- ****** -->
+</head>
+<body>
+    <!-- Sidenav -->
+        
+
+        <ul id="slide-out" class="sidenav" >
+            <li>
+                <div class="user-view">
+                    <div class="background">
+                        <img src="{{ url_for('static', filename='images/profile_cover.svg') }}" class="profile_cover_image">
+                    </div>
+                    <a href="#user"><img class="circle" src="{{ url_for('static', filename='images/ecopark_logo_transparent.png') }}" style="width:50%;height:50%;margin-bottom:-10%;margin-left:-13%"></a>
+                    <a href="#"><span class="white-text name">Ecopark Admin</span></a>
+                    <a href="#"><span class="white-text email">admin@ecopark.com</span></a>
+                </div>
+            </li>
+            <li ><a href="/admin_dashboard" class="text_decoration">New Account Requests</a></li>
+            <li class="active"><a href="/arrival" class="text_decoration">New Arrival</a></li>
+            <li><a href="/departure" class="text_decoration">Vehicle Departure</a></li>
+            
+            
+            <div class="nav_footer" style="margin-top:58%">
+                <div class="container">
+                    <form action="/admin_logout" method="post">
+                        <button class="btn btn-danger btn-block" style="background-color:#E14833;">Log out</button>
+                    </form>
+                </div>
+                
+            </div>
+        </ul>
+        <div class="row top" style="margin-top:2%;">
+            <div class="col-3">
+                <a href="#" data-target="slide-out" class="sidenav-trigger"><img src="{{ url_for('static', filename='images/user_icon.svg') }}" alt="User" class="user" style="width:20%"></a>
+            </div>
+            <div class="col-9 ecopark" >
+                <img src="{{ url_for('static', filename='images/ecopark_horizontal.svg') }}" alt="Ecopark" class="ecopark_horizontal" style="margin-left:20%">
+            </div>
+        </div>
+
+        <div class="container">
+            <h4 style="text-align:center" class="text-info">Vehicle Arrival</h4>
+        </div>
+        
+        <div class="container" style="margin-left:15%;margin-top:2%">
+            <form action="/admin_nonbookedarrivals" method="post">
+                <h4 style="float:right">Wallet Balance : <span style="color:green">{{user_obj.wallet_balance}}</span> </h4>
+                <div class="row">
+                    <div class="col s6">
+                      Enter Vehicle Number:
+                      <div class="input-field inline">
+                        <input id="email_inline" type="text" class="validate" name="vehicle_number" value="{{vehicle_number}}" readonly autocomplete="off">
+                        <label for="email_inline">Vehicle Number</label>
+                      </div>
+                      
+                    </div>
+                    
+                </div>
+                <div class="input-field col s3">
+                    <select name="place">
+                        <option value="1" selected>JP Nagar</option>
+                        <option value="2">Banashankari</option>
+                        <option value="3">HSR Layout</option>
+                        <option value="4" >Electronic City</option>
+                    </select>
+                    <label>Current Location</label>
+                </div><br><br>
+                <div class="input-field col s3" >
+                    <select name="plan" onchange="money_cal()" id="plan">
+                        <option value="Basic" selected>Basic</option>
+                        <option value="Semi deluxe"  >Semi-Deluxe</option>
+                        <option value="Ultra deluxe">Ultra-Deluxe</option>
+                        
+                    </select>
+                    <label>Stay Plan</label>
+                </div><br><br>
+                <div class="input-field col s3">
+                    <select name="stay" onchange="money_cal()" id="stay">
+                        <option value="0.5">30 min</option>
+                        <option value="1"  selected>1 Hour</option>
+                        <option value="1.5">1 Hour 30 minutes</option>
+                        <option value="2">2 Hours</option>
+                        <option value="2.5">2 Hours 30 minutes</option>
+                        <option value="3">3 Hours</option>
+                        <option value="4">4 Hours</option>
+                        <option value="5">5 Hours</option>
+                        <option value="6">6 Hours</option>
+                    </select>
+                    <label>Park hours</label>
+                </div>
+                <div class="row" style="float:right">
+                    <h5 style="color: orange;">Topay : <span id="topay">5</span></h5>
+                </div>
+                <div class="row">
+                    <h5 style="float:right">Total : <span id="total">15</span> </h5><br>
+                </div>
+                
+                <div class="row" style="float:right">
+                    <button type="submit" class="btn btn-primary" onclick=" return confirm('Do you wish to proceed?')">APPROVE</button>
+                </div>
+            </form>
+        </div>   
+    <!-- *********** -->
+    
+    <!-- Js Links -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script>
+        var wallet_balance = parseInt("{{user_obj.wallet_balance}}")
+        if(wallet_balance < 15)
+            $('#topay').text(15-wallet_balance)
+        else
+            $('#topay').text(0)
+        $(document).ready(function(){
+            $("#myInput").on("keyup", function() {
+              var value = $(this).val().toLowerCase();
+              $("#myTable tr").filter(function() {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+              });
+            });
+          });
+    </script>
+    <script>
+        $(document).ready(function(){
+            $('.sidenav').sidenav();
+        });
+        $(document).ready(function(){
+            $('select').formSelect();
+          });
+    </script>
+    <script>
+        function money_cal(){
+            var x = $('#plan').val()
+            var y = $('#stay').val()
+            var cost = 0
+            if (x=="Basic"){
+                cost = 15
+            }
+            else if(x == "Semi deluxe"){
+                cost = 25
+            }else if(x=="Ultra deluxe"){
+                cost = 40
+            }
+            total = Math.round(cost*y)
+            if(total > wallet_balance)
+                $('#topay').text(total-wallet_balance+10)
+            else
+                $('#topay').text(0)
+            $('#total').text(total)
+        }
+    </script>
+    {% if message %}
+        <script>M.toast({html: '{{message}}'})</script>
+    {% endif %}
+</body>
+</html>

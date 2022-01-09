@@ -1,0 +1,68 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;400&family=Quicksand:wght@300;400;500;700&family=Raleway:wght@300;400&family=Zen+Kaku+Gothic+New:wght@300&display=swap');
+*{
+    font-family: 'Quicksand', sans-serif;
+    font-weight:300;
+    text-decoration: none;
+}
+header, main, footer {
+    padding-left: 300px;
+}
+@media only screen and (max-width : 992px) {
+    header, main, footer {
+        padding-left: 0;
+    }
+}
+.profile_cover_image{
+    width:100%;
+}
+.sidenav{
+    width:70%;
+}
+.nav_footer{
+    position: absolute;
+    margin-left:15%;
+    bottom:10%;
+    
+}
+.active{
+    background-color: grey;
+}
+.top{
+    margin-top:5%;
+    align-items: center;
+}
+.user{
+    margin-left: 5%;
+    width:80%;
+}
+.ecopark_horizontal{
+    display: inline-block;
+    width:70%;
+}
+.address{
+    text-align: center;
+}
+.choose{
+    background-color: #FF725E;
+    padding:5px;
+    border: none;
+    color: white;
+}
+div.slide {
+    margin: 4px, 4px;
+    padding: 2%;
+    width: 300px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
+}
+
+.plan_cost{
+    font-weight:700;
+    -webkit-text-fill-color: white; /* Will override color (regardless of order) */
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: black;
+}
+a{
+    text-decoration: none !important;
+}

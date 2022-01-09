@@ -1,0 +1,93 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;400&family=Quicksand:wght@300;400;500&family=Raleway:wght@300;400&family=Zen+Kaku+Gothic+New:wght@300&display=swap');
+*{
+    font-family: 'Quicksand', sans-serif;
+    font-weight:300;
+    text-decoration: none;
+}
+a{
+    text-decoration: none !important;
+}
+header, main, footer {
+    padding-left: 300px;
+}
+@media only screen and (max-width : 992px) {
+    header, main, footer {
+        padding-left: 0;
+    }
+}
+.profile_cover_image{
+    width:100%;
+}
+.sidenav{
+    width:70%;
+}
+.nav_footer{
+    position: absolute;
+    margin-left:15%;
+    bottom:10%;
+    
+}
+.active{
+    background-color: grey;
+}
+.top{
+    margin-top:5%;
+    align-items: center;
+}
+.user{
+    margin-left: 5%;
+    width:80%;
+}
+.ecopark_horizontal{
+    display: inline-block;
+    width:70%;
+}
+.transaction_controller{
+    margin-left:8%;
+}
+
+.transaction_content{
+    margin-top: 5%;
+}
+
+.tab-pane{
+    background-color: white !important;
+}
+#parking_history{
+    text-align: center;
+}
+#parking_history_button{
+    background-color: #FF725E ;
+}
+
+#transactions_button{
+    background-color: white ;
+    color: #FF725E;
+    border: 1px solid #FF725E;
+}
+.view_invoices{
+    background-color: black !important;
+    color: white !important;
+    border: none !important;
+    box-shadow: none !important;
+    margin:-8px 0px !important;
+}
+
+.search_div{
+    margin-top:3% !important;
+}
+
+input:focus {
+    border-bottom: 1px solid black !important;
+    box-shadow: 0 0 0 0 black !important;
+    padding-left:10px !important;
+}
+input{
+    border:none !important;
+    border-bottom: 1px solid black !important;
+    box-shadow: 0 0 0 0 black !important;
+    padding-left:10px !important;
+    margin-left: -2% !important;
+    font-size: 10px;
+
+}

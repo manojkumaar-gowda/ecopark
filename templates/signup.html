@@ -1,0 +1,63 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/ecopark_favicon.png') }}">
+    <title>ecopark | Sign up</title>
+    <!-- CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/signup.css') }}">
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Materialize css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <!-- No Zoom -->
+    <meta name="viewport" content= "width=device-width, user-scalable=no">
+    
+</head>
+<body style="-moz-user-select: none; -webkit-user-select: none; -ms-user-select:none; user-select:none;-o-user-select:none;" unselectable="on" onselectstart="return false;" >
+    <!-- Preloader start -->
+        <div id="preloader" style="background-color: white;position: absolute;z-index:999999;height: 100%;width:100%">
+            <img src="{{ url_for('static', filename='images/preloader.gif') }}" alt="preloader"  style="width:100%;margin: 0;position: absolute;top: 50%;left: 50%;-ms-transform: translate(-50%, -50%);transform: translate(-50%, -50%);">
+        </div>
+        <script>
+            $(document).ready(function(){
+                $("#preloader").hide();
+            });
+        </script>
+    <!-- Preloader end -->
+        
+    
+    
+
+    <!-- Top -->
+    <img src="{{ url_for('static', filename='images/Vector.svg') }}" alt="" style="width: 100%;z-index:-99999">
+    <img src="{{ url_for('static', filename='images/ecopark.png') }}" alt="" style="width:40%;display: block;margin-left:30%;margin-top:-40%;margin-bottom:0%">
+    <!-- Top-end -->
+
+    <!-- Main -->
+    <div class="container main_container">
+        <h6 style="text-align:left">Mobile Number</h6>
+        <form method="post" action="">
+            <input type="number" style="text-align:left !important;" name="phone_number" max="9999999999" min="6000000000" autofocus required value="{{phone_number}}" autocomplete="off" >
+            <button class="btn signup" type="submit">SIGN UP</button>
+        </form>
+        <br>
+        <h6 style="text-align: center;">(or)</h6>
+        <h6 style="margin-top:10%">Already an ecopark user?<a href="/login" class="login" >Login</a> </h6>
+        <img src="{{ url_for('static', filename='images/signup.svg') }}" alt="" style="width: 100%;margin-top:5%">
+    </div>
+    <!-- Js Links -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+    {% if error_statement %}
+        <script>M.toast({html: 'Mobile number already taken'})</script>
+    {% endif %}
+</body>
+</html>

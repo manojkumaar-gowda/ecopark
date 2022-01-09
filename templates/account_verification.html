@@ -1,0 +1,102 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/ecopark_favicon.png') }}">
+    <title>ecopark | Account Verification</title>
+    <!-- CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/account_verification.css') }}">
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- Materialize css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <!-- No Zoom -->
+    <meta name="viewport" content= "width=device-width, user-scalable=no">
+</head>
+<body style="-moz-user-select: none; -webkit-user-select: none; -ms-user-select:none; user-select:none;-o-user-select:none;" unselectable="on" onselectstart="return false;" >
+    <!-- Preloader start -->
+      <div id="preloader" style="background-color: white;position: absolute;z-index:999999;height: 100%;width:100%">
+          <img src="{{ url_for('static', filename='images/preloader.gif') }}" alt="preloader"  style="width:100%;margin: 0;position: absolute;top: 50%;left: 50%;-ms-transform: translate(-50%, -50%);transform: translate(-50%, -50%);">
+      </div>
+      <script>
+          $(document).ready(function(){
+              $("#preloader").hide();
+          });
+      </script>
+    <!-- Preloader end -->
+    <!-- Top -->
+    <img src="{{ url_for('static', filename='images/Vector.svg') }}" alt="" style="width: 100%;z-index:-99999">
+    <img src="{{ url_for('static', filename='images/ecopark.png') }}" alt="" style="width:40%;display: block;margin-left:30%;margin-top:-40%;margin-bottom:0%">
+    <!-- Top-end -->
+
+    <!-- Main -->
+    <div class="container main_container">
+        <h5>Verify your OTP</h5>
+        <form action="/account_verification" method="post">
+            <div class="container row otp">
+                <div class="col-3">
+                    <input id="codeBox1" type="number" maxlength="1" onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))" onkeyup="onKeyUpEvent(1, event)" onfocus="onFocusEvent(1)" autofocus required name="otp_part1" autocomplete="off"/>
+                </div>
+                <div class="col-3">
+                    <input id="codeBox2" type="number" maxlength="1" onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))" onkeyup="onKeyUpEvent(2, event)" onfocus="onFocusEvent(2)" required name="otp_part2" autocomplete="off"/>
+                </div>
+                <div class="col-3">
+                    <input id="codeBox3" type="number" maxlength="1" onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))" onkeyup="onKeyUpEvent(3, event)" onfocus="onFocusEvent(3)" required name="otp_part3" autocomplete="off"/>
+                </div>
+                <div class="col-3">
+                    <input id="codeBox4" type="number" maxlength="1" onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))" onkeyup="onKeyUpEvent(4, event)" onfocus="onFocusEvent(4)" required name="otp_part4" autocomplete="off"/>
+                </div>
+            </div>
+            <button class="btn verify" type="submit" >Verify</button>
+        </form>
+        <br>
+        <div style="margin-top:20%">
+          <form action="/resend_otp" method="POST">
+              <h6>Didn't receive OTP? <button type="submit" class="resend">Resend OTP</button> </h6>
+          </form>
+          <img src="{{ url_for('static', filename='images/otp.svg') }}" alt="" style="width: 90%;">
+        </div>
+    </div>
+    <!-- Js Links -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script>
+        function getCodeBoxElement(index) {
+          return document.getElementById('codeBox' + index);
+        }
+        function onKeyUpEvent(index, event) {
+          const eventCode = event.which || event.keyCode;
+          if (getCodeBoxElement(index).value.length === 1) {
+            if (index !== 4) {
+              getCodeBoxElement(index+ 1).focus();
+            } else {
+              getCodeBoxElement(index).blur();
+              // Submit code
+              console.log('submit code ');
+            }
+          }
+          if (eventCode === 8 && index !== 1) {
+            getCodeBoxElement(index - 1).focus();
+          }
+        }
+        function onFocusEvent(index) {
+          for (item = 1; item < index; item++) {
+            const currentElement = getCodeBoxElement(item);
+            if (!currentElement.value) {
+                currentElement.focus();
+                break;
+            }
+          }
+        }
+    </script>
+    {% if error_statement %}
+        <script>M.toast({html: 'Invalid OTP'})</script>
+    {% endif %}
+</body>
+</html>

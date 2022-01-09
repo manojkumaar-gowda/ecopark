@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/ecopark_favicon.png') }}">
+    <title>ecopark | Account Registration</title>
+    <!-- CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/registration.css') }}">
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- Materialize css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <!-- No Zoom -->
+    <meta name="viewport" content= "width=device-width, user-scalable=no">
+</head>
+<body style="-moz-user-select: none; -webkit-user-select: none; -ms-user-select:none; user-select:none;-o-user-select:none;" unselectable="on" onselectstart="return false;" >
+    <!-- Preloader start -->
+        <div id="preloader" style="background-color: white;position: absolute;z-index:999999;height: 100%;width:100%">
+            <img src="{{ url_for('static', filename='images/preloader.gif') }}" alt="preloader"  style="width:100%;margin: 0;position: absolute;top: 50%;left: 50%;-ms-transform: translate(-50%, -50%);transform: translate(-50%, -50%);">
+        </div>
+        <script>
+            $(document).ready(function(){
+                $("#preloader").hide();
+            });
+        </script>
+    <!-- Preloader end -->
+    <div class="registration_container">
+        <!-- Title -->        
+        <div class="container top_container">
+            <img src="{{ url_for('static', filename='images/ecopark_horizontal.svg') }}" alt="" class="ecopark_horizontal">
+            <div class="col">
+                <h5 class="ecopark_text">Vehicle Registration</h5>
+            </div>
+        </div>
+        <!-- *********** -->
+        <!-- Main -->
+        <div class="container" style="margin-bottom:10%;margin-top:5%">
+            <form onsubmit="return validateFile()" method="post" action='/registration' enctype="multipart/form-data">    
+                <!-- Row 1 -->
+                <div class="row">
+                    <div class="col-5">
+                        <div class="input-field">
+                            <input id="vehicle_number" type="text" class="validate"  maxlength="10" name="vehicle_number" value="{{vehicle_number}}" autofocus required autocomplete="off">
+                            <label for="vehicle_number" class="label_text" >Vehicle_Number</label>
+                        </div>
+                    </div>
+                    <div class="col-7">
+                        <div class="input-field">
+                            <input id="vehicle_model" type="text" class="validate"  maxlength="20" name="vehicle_model" value="{{vehicle_model}}" required autocomplete="off">
+                            <label for="vehicle_model" class="label_text">Vehicle Model</label>
+                        </div>
+                    </div>
+                </div>
+                <!-- Row 2 -->
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="Mobile_number" type="text" class="validate"  maxlength="10" onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))"  minlength="10" name="mobile_number"  value="{{phone_number}}" disabled required>
+                        <label for="Mobile_number" class="label_text" >Mobile Number</label>
+                    </div>
+                </div>
+                <!-- Row 3 -->
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="Email" type="email" class="validate" name="email"value="{{email}}"  required autocomplete="off">
+                        <label for="Email" class="label_text">Email</label>
+                    </div>
+                </div>
+                <!-- Row 4 -->
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="vehicle_owner" type="text" class="validate" maxlength="40" name="vehicle_owner" value="{{vehicle_owner}}" required autocomplete="off">
+                        <label for="vehicle_owner" class="label_text">Vehicle Owner</label>
+                    </div>
+                </div>
+                <!-- Row 5 -->
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="insurance_policy_number" type="text" class="validate"  name="insurance_policy_number" value="{{insurance_policy_number}}" required autocomplete="off">
+                        <label for="insurance_policy_number" class="label_text">Insurance Policy Number</label>
+                    </div>
+                </div>
+                <!-- Row 6 -->
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="chasis_number" type="text" class="validate" name="chasis_number" value="{{chasis_number}}" required autocomplete="off">
+                        <label for="chasis_number" class="label_text">Chasis Number</label>
+                    </div>
+                </div>
+                <!-- Row 7 -->
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="Engine_number" type="text" class="validate" name="engine_number" value="{{engine_number}}" required autocomplete="off">
+                        <label for="Engine_number" class="label_text">Engine Number</label>
+                    </div>
+                </div>
+                <!-- Row 8 -->
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="Vehicle_Color" type="text" class="validate" name="vehicle_color" value="{{vehicle_color}}" required autocomplete="off">
+                        <label for="Vehicle_Color" class="label_text"> Vehicle Color</label>
+                    </div>
+                </div>
+                <!-- Row 9 -->
+                <label>Upload a recent image of the vehicle in PDF format</label>
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input file1" id="customFile"  name="v_image" accept="application/pdf" onchange="validateSize(this)" required>
+                    <label class="custom-file-label" for="customFile">Choose file</label>
+                </div>
+                
+                <!-- Row 10 -->
+                <label>Upload an image of the RC book in PDF format</label>
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input file1" id="customFile" name="rc_image" accept="application/pdf"  onchange="validateSize(this)" required>
+                    <label class="custom-file-label" for="customFile">Choose file</label>
+                </div>
+
+                <!-- Row 11 -->
+                <label>Upload ID Proof in PDF format</label>
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" id="customFile" name="id_image"  accept="application/pdf" onchange="validateSize(this)" required>
+                    <label class="custom-file-label" for="customFile">Choose file</label>
+                </div>
+
+                <!-- Row 12 -->
+                <label style="margin-top:5%">
+                    <input type="checkbox" class="filled-in" required />
+                    <span>I hereby declare that I have read the <a target="_blank" href="/terms_of_services">terms of services</a> and <a href="/privacy_policy" target="_blank">privacy policy</a> and agree with them</span>
+                </label>
+
+
+
+
+                
+                
+                <!-- Row 13 -->
+                <button type="submit" class="btn btn-block update_button">Submit</button>
+            </div>
+        </form>
+        <!-- Main-end -->
+    </div>
+    <!-- Js Links -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $('.sidenav').sidenav();
+        });
+        $(".custom-file-input").on("change", function() {
+            var fileName = $(this).val().split("\\").pop();
+            $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+        });
+        $(".custom-file-input").on("change", function() {
+            var fileName = $(this).val().split("\\").pop();
+            $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+        });
+        $(".custom-file-input").on("change", function() {
+            var fileName = $(this).val().split("\\").pop();
+            $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+        });
+    </script>
+    <!-- File size validation -->
+    <script>
+        function validateSize(input) {
+            const fileSize = input.files[0].size / 1024 / 1024; // in MiB
+            if (fileSize > 2) {
+                M.toast({html: 'File size exceeds 2 MB'})
+            }
+            
+        }
+    </script>
+    {% if message %}
+        <script>M.toast({html: '{{message}}'})</script>
+    {% endif %}
+</body>
+</html>

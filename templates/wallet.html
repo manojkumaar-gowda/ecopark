@@ -1,0 +1,133 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/ecopark_favicon.png') }}">
+    <title>ecopark | Wallet</title>
+    <!-- CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/wallet.css') }}">
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- Materialize css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <!-- No Zoom -->
+    <meta name="viewport" content= "width=device-width, user-scalable=no">
+    <!-- Fontawesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body style="-moz-user-select: none; -webkit-user-select: none; -ms-user-select:none; user-select:none;-o-user-select:none;" unselectable="on" onselectstart="return false;" >
+    <!-- Preloader start -->
+        <div id="preloader" style="background-color: white;position: absolute;z-index:999999;height: 100%;width:100%">
+            <img src="{{ url_for('static', filename='images/preloader.gif') }}" alt="preloader"  style="width:100%;margin: 0;position: absolute;top: 50%;left: 50%;-ms-transform: translate(-50%, -50%);transform: translate(-50%, -50%);">
+        </div>
+        <script>
+            $(document).ready(function(){
+                $("#preloader").hide();
+            });
+        </script>
+    <!-- Preloader end -->
+    <div class="wallet_container">
+        <!-- Sidenav -->
+        
+
+            <ul id="slide-out" class="sidenav">
+                <li>
+                    <div class="user-view">
+                        <div class="background">
+                            <img src="{{ url_for('static', filename='images/profile_cover.svg') }}" class="profile_cover_image">
+                        </div>
+                        <a href="#user"><img class="circle" src="{{ url_for('static', filename='images/ecopark_logo_transparent.png') }}" style="width:50%;height:50%;margin-bottom:-10%;margin-left:-13%"></a>
+                        <a href="#"><span class="white-text name">{{user_obj.vehicle_number}}</span></a>
+                        <a href="#"><span class="white-text email">{{user_obj.vehicle_owner}}</span></a>
+                    </div>
+                </li>
+                <li><a href="/" class="text_decoration">Dashboard</a></li>
+                <li class="active"><a href="/wallet" class="text_decoration">Wallet</a></li>
+                <li><a href="/account_transactions" class="text_decoration">Account Transactions</a></li>
+                <li><a href="/settings" class="text_decoration">Settings</a></li>
+                <li><a href="mailto:manojrmk2001@gmail.com" class="text_decoration">Contact us</a></li>
+                <li><a download href="whatsapp://send?text=https://ecoparkapp.herokuapp.com/static/app_download/ecopark.apk" data-action="share/whatsapp/share" class="text_decoration">Share App <span><i class="fa fa-share-alt" style="color: grey;"></i></span> </a></li>
+                <div class="nav_footer">
+                    <div class="container">
+                        <form action="/logout" method="post">
+                            <button type="submit" class="btn btn-danger btn-block" style="background-color:#E14833;">Log out</button>
+                        </form>
+                    </div>
+                    <li>
+                        <span>
+                            <a class="waves-effect" href="/terms_of_services" style="color:grey">Terms of Services</a>
+                        </span>
+                        <span> | </span>
+                        <span>
+                            <a class="waves-effect" href="/privacy_policy" style="color:grey">Privacy Policy</a>
+                        </span>
+                    </li>
+                    <li style="text-align:center;color:grey" onclick="window.location='/team_members'">©ecopark-2021</li>
+                </div>
+            </ul>
+            <div class="row top">
+                <div class="col-3">
+                    <a href="#" data-target="slide-out" class="sidenav-trigger"><img src="{{ url_for('static', filename='images/user_icon.svg') }}" alt="User" class="user"></a>
+                </div>
+                <div class="col-9 ecopark">
+                    <img src="{{ url_for('static', filename='images/ecopark_horizontal.svg') }}" alt="Ecopark" class="ecopark_horizontal">
+                </div>
+            </div>
+            
+                
+        <!-- *********** -->
+        
+        <!-- Wallet -->
+
+        <div class="container">
+            <h6 class="low_bal_text">Available Balance</h6>
+            <input type="text" value="₹ {{ wallet_balance }}" id="balance" class="balance" style="color:#E14833;font-weight: bolder" disabled autocomplete="off">
+            <h5>Topup Wallet</h5>
+            <form action="" method ="post" onsubmit="return confirm('Payment once made cannot be refunded. Do you wish to continue?')">
+                <input type="number" class="recharge" placeholder="Enter Amount" id="amount" name="add_balance" autocomplete="off"  required > 
+                <div class="recommendation">
+                    <p>Recommended</p>
+                    <a class="recommended_amount" style="background-color: white;color:#E14833;" onclick="$('#amount').attr('value','1000')"><span>₹1000</span></a>
+                    <a class="recommended_amount" style="background-color: white;color:#E14833;" onclick="$('#amount').attr('value','2000')"><span>₹2000</span></a>
+                    <a class="recommended_amount" style="background-color: white;color:#E14833;" onclick="$('#amount').attr('value','5000')"><span>₹5000</span></a>
+                </div>
+                <button class="proceed_to_pay" type="submit">PROCEED TO TOPUP</button>
+            </form>
+            <img src="{{ url_for('static', filename='images/wallet_img.svg') }}" alt="Wallet image" class="wallet_img">
+        </div>
+        <!-- Wallet-end -->
+
+    </div>
+    <!-- Js Links -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $('.sidenav').sidenav();
+            var bal = $("#balance").val();
+            bal = bal.substring(1);
+            if(bal > 15){
+                $("#balance").css("color","green");
+            }
+        });
+    </script>
+    
+</body>
+</html>
+
+<!-- 
+    Payment Successful !
+Dear ecopark user, 
+Your wallet was credited with ₹500 was successfully. 
+Transaction id: hjvfhb732332bb
+Wallet Balance: ₹ xxxx/-
+Please visit the app for further details ecopark.online
+
+
+ -->

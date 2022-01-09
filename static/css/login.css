@@ -1,0 +1,54 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;400&family=Quicksand:wght@300;400;500&family=Raleway:wght@300;400&family=Zen+Kaku+Gothic+New:wght@300&display=swap');
+*{
+    font-family: 'Quicksand', sans-serif;
+    font-weight:300;
+    text-decoration: none !important;
+    margin: 0;
+}
+
+a:focus{
+    color:#FF725E !important;
+}
+
+.main_container{
+    text-align: center;
+    margin-top: 15% !important;
+}
+
+input{
+    box-shadow: none !important;
+    border: 1px solid black !important;
+    border-radius: 10px !important;
+    padding-left: 5% !important;
+}
+input[type=number] {
+    height: 45px;
+    width: 45px;
+    font-size: 25px;
+    text-align: center;
+    border-bottom: 1px solid #FF725E !important;
+    font-weight: bolder;
+    box-shadow: none !important;
+}
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.login{
+    
+    background-color: #FF725E !important;
+    color: white !important;
+    width:50%;
+}
+
+.signup{
+    background-color: white;
+    border: none;
+    color:#FF725E;
+}
+.resend:focus{
+    background-color: white;
+    border: none;
+    color:blue;
+}

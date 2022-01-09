@@ -1,0 +1,67 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;400&family=Quicksand:wght@300;400;500&family=Raleway:wght@300;400&family=Zen+Kaku+Gothic+New:wght@300&display=swap');
+*{
+    font-family: 'Quicksand', sans-serif;
+    font-weight:300;
+    text-decoration: none;
+}
+input{
+    box-shadow: none !important;
+}
+a{
+    text-decoration: none !important;
+}
+header, main, footer {
+    padding-left: 300px;
+}
+@media only screen and (max-width : 992px) {
+    header, main, footer {
+        padding-left: 0;
+    }
+}
+.profile_cover_image{
+    width:100%;
+}
+.sidenav{
+    width:70%;
+}
+.nav_footer{
+    position: absolute;
+    margin-left:15%;
+    bottom:10%;
+    
+}
+.active{
+    background-color: grey;
+}
+.top{
+    margin-top:5%;
+    align-items: center;
+}
+.user{
+    margin-left: 5%;
+    width:80%;
+}
+.ecopark_horizontal{
+    display: inline-block;
+    width:70%;
+}
+
+
+.label_text{
+    background-color: white;
+    color: black;
+}
+.settings_container{
+    margin-bottom: 10%;
+}
+
+.update_button{
+    background-color: #FF725E !important;
+    color:white !important;
+    box-shadow: none !important;
+}
+.update_button:focus{
+    background-color: #FF725E !important;
+    box-shadow: none !important;
+    color:white !important;
+}

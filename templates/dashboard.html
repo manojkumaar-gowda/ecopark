@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/ecopark_favicon.png') }}">
+    <title>ecopark | Dashboard</title>
+    <!-- CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Materialize css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <!-- No Zoom -->
+    <meta name="viewport" content= "width=device-width, user-scalable=no">
+    <!-- Fontawesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+{% if not user_obj.vehicle_park_status %}
+<body style="-moz-user-select: none; -webkit-user-select: none; -ms-user-select:none; user-select:none;-o-user-select:none;" unselectable="on" onselectstart="return false;" >
+    <!-- Preloader start -->
+        <div id="preloader" style="background-color: white;position: absolute;z-index:999999;height: 100%;width:100%">
+            <img src="{{ url_for('static', filename='images/preloader.gif') }}" alt="preloader"  style="width:100%;margin: 0;position: absolute;top: 50%;left: 50%;-ms-transform: translate(-50%, -50%);transform: translate(-50%, -50%);">
+        </div>
+        <script>
+            $(document).ready(function(){
+                $("#preloader").hide();
+            });
+        </script>
+    <!-- Preloader end -->
+    <div class="dashboard_container">
+        <!-- Sidenav -->
+            <ul id="slide-out" class="sidenav" >
+                <li>
+                    <div class="user-view">
+                        <div class="background">
+                            <img src="{{ url_for('static', filename='images/profile_cover.svg') }}" class="profile_cover_image">
+                        </div>
+                        <a href="#user"><img class="circle" src="{{ url_for('static', filename='images/ecopark_logo_transparent.png') }}" style="width:50%;height:50%;margin-bottom:-10%;margin-left:-13%"></a>
+                        <a><span class="white-text name">{{user_obj.vehicle_number}}</span></a>
+                        <a><span class="white-text email">{{user_obj.vehicle_owner}}</span></a>
+                    </div>
+                </li>
+                <li class="active"><a href="/" class="text_decoration">Dashboard</a></li>
+                <li><a href="/wallet" class="text_decoration">Wallet</a></li>
+                <li><a href="/account_transactions" class="text_decoration">Account Transactions</a></li>
+                <li><a href="/settings" class="text_decoration">Settings</a></li>
+                <li><a href="mailto:manojrmk2001@gmail.com" class="text_decoration">Contact us</a></li>
+                <li><a download href="whatsapp://send?text=https://ecoparkapp.herokuapp.com/static/app_download/ecopark.apk" data-action="share/whatsapp/share" class="text_decoration">Share App <span><i class="fa fa-share-alt" style="color: grey;"></i></span> </a></li>
+                <div class="nav_footer">
+                    <div class="container">
+                        <form action="/logout" method="post">
+                            <button class="btn btn-danger btn-block" style="background-color:#E14833;">Log out</button>
+                        </form>
+                    </div>
+                    <li>
+                        <span>
+                            <a class="waves-effect" href="/terms_of_services" style="color:grey">Terms of Services</a>
+                        </span>
+                        <span> | </span>
+                        <span>
+                            <a class="waves-effect" href="/privacy_policy" style="color:grey">Privacy Policy</a>
+                        </span>
+                    </li>
+                    <li style="text-align:center;color:grey" onclick="window.location='/team_members'">©ecopark-2021</li>
+                </div>
+            </ul>
+            <div class="row top">
+                <div class="col-3">
+                    <a href="#" data-target="slide-out" class="sidenav-trigger"><img src="{{ url_for('static', filename='images/user_icon.svg') }}" alt="User" class="user"></a>
+                </div>
+                <div class="col-9 ecopark">
+                    <img src="{{ url_for('static', filename='images/ecopark_horizontal.svg') }}" alt="Ecopark" class="ecopark_horizontal">
+                </div>
+            </div>
+            
+                
+        <!-- *********** -->
+
+        <!-- Main -->
+        <!-- If not parked -->
+        
+            <div class="container main_dashboard" style="margin-top:15%;margin-bottom: 10%;">
+                <h6>Select Location</h6>
+                <form action="" method="POST"> 
+                    <div class="input-group mb-3">
+                        
+                        <select id="selected_location" name="location" class="custom-select" onchange="changelocation()">
+                            <option value="1" selected>JP Nagar</option>
+                            <option value="2">Banashankari</option>
+                            <option value="3">HSR Layout</option>
+                            <option value="4" >Electronic City</option>
+                        </select>
+                        <!-- 
+                            <div class="input-group-append">
+                                <button class="btn btn-success" type="submit" >Go</button>
+                            </div>
+                        -->
+                    </div>
+                    
+                    <div class="address">
+                        <p><b>Address: </b><span id="address">{{parks_obj[0].park_address}}</span></p>
+                    </div>
+                    <div class="book">
+                        <button type="submit" class="btn btn-block" style="background-color:#FF725E;color: white;">Pre-Book Now</button>
+                    </div>
+                </form>
+                
+                <div class="row availability">
+                    <div class="col-4">
+                        <h1 class="count" id="ultra-vacancy">{{parks_obj[0].ultra_deluxe_vacancy}}</h1>
+                        <p style="font-weight:normal;">U-Deluxe</p>
+                    </div>
+                    <div class="col-4">
+                        <h1 class="count" id="semi-vacancy">{{parks_obj[0].semi_deluxe_vacancy}}</h1>
+                        <p style="font-weight:normal;">S-Deluxe</p>
+                    </div>
+                    <div class="col-4">
+                        <h1 class="count" id="basic-vacancy">{{parks_obj[0].basic_vacancy}}</h1>
+                        <p style="font-weight:normal;">Basic</p>
+                    </div>
+                </div>
+                
+                <iframe id="location_map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d10533.673399184396!2d77.57842774048427!3d12.901232342121146!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae150d7349a72b%3A0xf3d03ea1e1dd3d46!2sJ.%20P.%20Nagar%2C%20Bengaluru%2C%20Karnataka%20560078!5e0!3m2!1sen!2sin!4v1640092015597!5m2!1sen!2sin"  height="350" style="border:1px solid black;width:100%" allowfullscreen="" loading="lazy"></iframe>
+                <a id="navigation_button" class="btn btn-block">Click here to open maps</a>
+            </div>
+        <!-- Main-end -->
+    </div>
+    <!-- Js Links -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $('.sidenav').sidenav();
+        });
+        //geolocation
+        
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(setLink);
+        } else { 
+            x.innerHTML = "Geolocation is not supported by this browser.";
+        }
+        function setLink(position) {
+            var lat =  position.coords.latitude;
+            var lon =  position.coords.longitude;           
+            var link = "https://www.google.com/maps/dir/?api=1&origin="+lat+","+lon+"&destination={{parks_obj[0].latitude}},{{parks_obj[0].longitude}}&travelmode=driving" ;
+            $("#navigation_button").attr("href", link);
+        }
+        
+        
+        $("#navigation_button").click(function(){
+            if($("#navigation_button").attr("href") == undefined){
+                M.toast({html: 'Please enable device location'})
+            }
+        });
+        function changelocation(){
+            var loc = $('#selected_location').val();
+            //JP NAGAR
+            if(loc == '1'){
+                $("#location_map").attr("src","https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d10533.673399184396!2d77.57842774048427!3d12.901232342121146!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae150d7349a72b%3A0xf3d03ea1e1dd3d46!2sJ.%20P.%20Nagar%2C%20Bengaluru%2C%20Karnataka%20560078!5e0!3m2!1sen!2sin!4v1640092015597!5m2!1sen!2sin");
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(setLink);
+                } else { 
+                    x.innerHTML = "Geolocation is not supported by this browser.";
+                }
+                function setLink(position) {
+                    var lat =  position.coords.latitude;
+                    var lon =  position.coords.longitude;           
+                    var link = "https://www.google.com/maps/dir/?api=1&origin="+lat+","+lon+"&destination={{parks_obj[0].latitude}},{{parks_obj[0].longitude}}&travelmode=driving" ;
+                    $("#navigation_button").attr("href", link);
+                }
+                $("#ultra-vacancy").text("{{parks_obj[0].ultra_deluxe_vacancy}}");
+                $("#semi-vacancy").text("{{parks_obj[0].semi_deluxe_vacancy}}");
+                $("#basic-vacancy").text("{{parks_obj[0].basic_vacancy}}");
+                $("#address").text("{{parks_obj[0].park_address}}");
+                
+            }
+
+            //BANASHANKARI
+            else if(loc == '2'){
+                $("#location_map").attr("src","https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d22317.194000610576!2d77.53623629205836!3d12.933482404397962!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae3e2c22c358b7%3A0x157068107f36f2ef!2sBanashankari%2C%20Bengaluru%2C%20Karnataka!5e0!3m2!1sen!2sin!4v1640093043442!5m2!1sen!2sin");
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(setLink);
+                } else { 
+                    x.innerHTML = "Geolocation is not supported by this browser.";
+                }
+                function setLink(position) {
+                    var lat =  position.coords.latitude;
+                    var lon =  position.coords.longitude;           
+                    var link = "https://www.google.com/maps/dir/?api=1&origin="+lat+","+lon+"&destination={{parks_obj[1].latitude}},{{parks_obj[1].longitude}}&travelmode=driving" ;
+                    $("#navigation_button").attr("href", link);
+                }
+                $("#ultra-vacancy").text("{{parks_obj[1].ultra_deluxe_vacancy}}");
+                $("#semi-vacancy").text("{{parks_obj[1].semi_deluxe_vacancy}}");
+                $("#basic-vacancy").text("{{parks_obj[1].basic_vacancy}}");
+                $("#address").text("{{parks_obj[1].park_address}}");
+            }
+
+            //Electronic City
+            else if(loc == '3'){
+                $("#location_map").attr("src","https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7777.7703293933355!2d77.62991412548442!3d12.915101560483162!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae1491bfdc6ecd%3A0xf232718439fbc879!2sHSR%20Layout%2C%20Bengaluru%2C%20Karnataka!5e0!3m2!1sen!2sin!4v1640092919578!5m2!1sen!2sin");
+                
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(setLink);
+                } else { 
+                    x.innerHTML = "Geolocation is not supported by this browser.";
+                }
+                function setLink(position) {
+                    var lat =  position.coords.latitude;
+                    var lon =  position.coords.longitude;           
+                    var link = "https://www.google.com/maps/dir/?api=1&origin="+lat+","+lon+"&destination={{parks_obj[2].latitude}},{{parks_obj[2].longitude}}&travelmode=driving" ;
+                    $("#navigation_button").attr("href", link);
+                }
+                $("#ultra-vacancy").text("{{parks_obj[2].ultra_deluxe_vacancy}}");
+                $("#semi-vacancy").text("{{parks_obj[2].semi_deluxe_vacancy}}");
+                $("#basic-vacancy").text("{{parks_obj[2].basic_vacancy}}");
+                $("#address").text("{{parks_obj[2].park_address}}");
+            }
+
+            //HSR Layout
+            else if(loc == '4'){
+                $("#location_map").attr("src","https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d62241.699731122746!2d77.6535976982812!3d12.836411294504565!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae6c8a7750e1c3%3A0x4a5cfc0fce5af71d!2sElectronic%20City%2C%20Bengaluru%2C%20Karnataka!5e0!3m2!1sen!2sin!4v1640092783105!5m2!1sen!2sin");
+                
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(setLink);
+                } else { 
+                    x.innerHTML = "Geolocation is not supported by this browser.";
+                }
+                function setLink(position) {
+                    var lat =  position.coords.latitude;
+                    var lon =  position.coords.longitude;           
+                    var link = "https://www.google.com/maps/dir/?api=1&origin="+lat+","+lon+"&destination={{parks_obj[3].latitude}},{{parks_obj[3].longitude}}&travelmode=driving" ;
+                    $("#navigation_button").attr("href", link);
+                }
+                $("#ultra-vacancy").text("{{parks_obj[3].ultra_deluxe_vacancy}}");
+                $("#semi-vacancy").text("{{parks_obj[3].semi_deluxe_vacancy}}");
+                $("#basic-vacancy").text("{{parks_obj[3].basic_vacancy}}");
+                $("#address").text("{{parks_obj[3].park_address}}");
+                
+            }
+
+        }
+        
+    </script>
+    
+    
+</body>
+
+{% else %}
+
+<body style="background-color: #F8F9FF;-moz-user-select: none; -webkit-user-select: none; -ms-user-select:none; user-select:none;-o-user-select:none;" unselectable="on" onselectstart="return false;" >
+    <!-- Preloader start -->
+        <div id="preloader" style="background-color: white;position: absolute;z-index:999999;height: 100%;width:100%">
+            <img src="{{ url_for('static', filename='images/preloader.gif') }}" alt="preloader"  style="width:100%;margin: 0;position: absolute;top: 50%;left: 50%;-ms-transform: translate(-50%, -50%);transform: translate(-50%, -50%);">
+        </div>
+        <script>
+            $(document).ready(function(){
+                $("#preloader").hide();
+            });
+        </script>
+    <!-- Preloader end -->
+    <div class="dashboard_container">
+        <!-- Sidenav -->
+            <ul id="slide-out" class="sidenav" >
+                <li>
+                    <div class="user-view">
+                        <div class="background">
+                            <img src="{{ url_for('static', filename='images/profile_cover.svg') }}" class="profile_cover_image">
+                        </div>
+                        <a href="#user"><img class="circle" src="{{ url_for('static', filename='images/ecopark_logo_transparent.png') }}" style="width:50%;height:50%;margin-bottom:-10%;margin-left:-13%"></a>
+                        <a><span class="white-text name">{{user_obj.vehicle_number}}</span></a>
+                        <a><span class="white-text email">{{user_obj.vehicle_owner}}</span></a>
+                    </div>
+                </li>
+                <li class="active"><a href="/" class="text_decoration">Dashboard</a></li>
+                <li><a href="/wallet" class="text_decoration">Wallet</a></li>
+                <li><a href="/account_transactions" class="text_decoration">Account Transactions</a></li>
+                <li><a href="/settings" class="text_decoration">Settings</a></li>
+                <li><a href="mailto:manojrmk2001@gmail.com" class="text_decoration">Contact us</a></li>
+                <li><a download href="whatsapp://send?text=https://ecoparkapp.herokuapp.com/static/app_download/ecopark.apk" data-action="share/whatsapp/share" class="text_decoration">Share App <span><i class="fa fa-share-alt" style="color: grey;"></i></span> </a></li>
+                <div class="nav_footer">
+                    <div class="container">
+                        <form action="/logout" method="post">
+                            <button class="btn btn-danger btn-block" style="background-color:#E14833;">Log out</button>
+                        </form>
+                    </div>
+                    <li>
+                        <span>
+                            <a class="waves-effect" href="/terms_of_services" style="color:grey">Terms of Services</a>
+                        </span>
+                        <span> | </span>
+                        <span>
+                            <a class="waves-effect" href="/privacy_policy" style="color:grey">Privacy Policy</a>
+                        </span>
+                    </li>
+                    <li style="text-align:center;color:grey" onclick="window.location='/team_members'">©ecopark-2021</li>
+                </div>
+            </ul>
+            <div class="row top">
+                <div class="col-3">
+                    <a href="#" data-target="slide-out" class="sidenav-trigger"><img src="{{ url_for('static', filename='images/user_icon.svg') }}" alt="User" class="user"></a>
+                </div>
+                <div class="col-9 ecopark">
+                    <img src="{{ url_for('static', filename='images/ecopark_horizontal.svg') }}" alt="Ecopark" class="ecopark_horizontal">
+                </div>
+            </div>
+            
+                
+        <!-- ***** -->
+        <!-- Main -->
+        <!-- If parked -->
+            <div class="container" style="margin-top:10%;margin-bottom: 10%;">
+                <div class="address">
+                    <h6 style="font-weight: bold;">{{parked.park_name}}</h6>
+                    <p><b>Address: {{parked.park_address}}</b></p>
+                </div>
+                <a id="navigation_button" class="btn btn-block">NAVIGATE TO LOCATION</a>                    
+                <div class="countdown_timer">
+                    <h5 style="font-weight: bold;color:#FF725E" id="overall_time">Time Left:<span style="font-weight: bold;color:#FF725E" id="hours">{{time_left.hours}}</span>:<span style="font-weight: bold;color:#FF725E" id="minutes">{{time_left.minutes}}</span>:<span style="font-weight: bold;color:#FF725E" id="seconds">{{time_left.seconds}}</span></h5>
+                </div>
+                <img src="{{ url_for('static', filename='images/wait.gif') }}" alt="Wait" class="wait">
+                <div class="extend_stay">
+                    <h6>Extend Park Stay</h6>
+                    <h5 style="text-align: center;">Subtotal: ₹ <span id="display">{{cost}}</span> </h5>
+                    <form method="POST" action="/extend" > 
+                        <select id="selected_time" name="stay" class="custom-select" onchange="display_cost()">
+                            <option value="0.5">30 min</option>
+                            <option value="1"  selected>1 Hour</option>
+                            <option value="1.5">1 Hour 30 minutes</option>
+                            <option value="2">2 Hours</option>
+                            <option value="2.5">2 Hours 30 minutes</option>
+                            <option value="3">3 Hours</option>
+                            <option value="4">4 Hours</option>
+                            <option value="5">5 Hours</option>
+                            <option value="6">6 Hours</option>
+                        </select>
+                        <p  onclick="M.toast({html: 'Insufficient Wallet Balance. Please recharge to continue'})" class="btn-block proceed_to_pay" id="low_balance" style="background-color: white;border:1px solid red;color:Red;text-align: center;">Insufficient Balance</p>
+                        <button class="btn-block proceed_to_pay" id="proceed_to_pay" onclick="return confirm('Are you sure you wish to continue')">PROCEED TO PAY</button>
+                    </form>
+                </div>        
+            </div>
+        <!-- Main -end -->
+        </div>
+        <!-- Js Links -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+        <script>
+            $(document).ready(function(){
+                $('.sidenav').sidenav();
+            });
+            var actual = "{{cost}}"
+            var validate = "{{user_obj.wallet_balance}}";
+            validate = parseInt(validate)
+            if(actual > validate ){
+                $('#proceed_to_pay').hide()
+                $('#low_balance').show()
+            }else{
+                $('#proceed_to_pay').show()
+                $('#low_balance').hide()
+            }
+            //geolocation
+            
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(setLink);
+            } else { 
+                x.innerHTML = "Geolocation is not supported by this browser.";
+            }
+            function setLink(position) {
+                var lat =  position.coords.latitude;
+                var lon =  position.coords.longitude;           
+                var link = "https://www.google.com/maps/dir/?api=1&origin="+lat+","+lon+"&destination={{parked.latitude}},{{parked.longitude}}&travelmode=driving" ;
+                $("#navigation_button").attr("href", link);
+            }
+            
+                $("#navigation_button").click(function(){
+                    if($("#navigation_button").attr("href") == undefined){
+                        M.toast({html: 'Please enable device location'})
+                    }
+                });
+            
+        </script>
+        <script>
+            if( parseInt("{{time_left.hours}}") < 0 ){
+                window.location='/expired'
+            }
+            function countdown(hr,mm,ss)
+            {
+                var interval = setInterval(function(){
+
+                    
+                    ss--;
+                    
+                    if(ss == 0)
+                    {
+                        ss = 59;
+                        if(hr>=0)
+                            mm--;
+                        if(mm == 0)
+                        {
+                            if(hr > 0){
+                                mm = 59;
+                                ss = 59;
+                                hr--;
+                            }else if(h==0){
+                                mm = 0;
+                                hr = 0;
+                            }
+                        }
+                    }
+                    if( hr == 0 && mm==0 && ss==1){
+                        window.location='/expired'
+                        clearInterval(interval);
+                    }
+                    if(hr.toString().length < 2) hr = "0"+hr;
+                    if(mm.toString().length < 2) mm = "0"+mm;
+                    if(ss.toString().length < 2) ss = "0"+ss;
+                    $("#hours").text(hr);
+                    $("#minutes").text(mm);
+                    $("#seconds").text(ss);
+                    
+                },1000)
+            }
+            countdown(parseInt("{{time_left.hours}}"),parseInt("{{time_left.minutes}}"),parseInt("{{time_left.seconds}}"))
+            
+        </script>
+        <script>
+            
+            function display_cost(){
+                var actual = "{{cost}}"
+                var time = $("#selected_time").val();
+                var cost = Math.round(time*actual);
+                var validate = "{{user_obj.wallet_balance}}";
+                validate = parseInt(validate)
+                
+                $('#display').html(cost);
+                if(cost > validate ){
+                    $('#proceed_to_pay').hide()
+                    $('#low_balance').show()
+                }else{
+                    $('#proceed_to_pay').show()
+                    $('#low_balance').hide()
+                }
+    
+            }
+        </script>
+</body>
+
+{% endif %}
+</html>
+
