@@ -118,7 +118,7 @@ def admin_login():
     if request.method == "POST":
         id = request.form["emp_id"]
         pwd = request.form["pswd"]
-        if(id=="ecopark" and pwd=="Afbcx2mx"):
+        if(id=="ecopark" and pwd=="123"):
             session.permanent = True
             session["admin_logged_in"] = True
             return redirect('/admin_dashboard')
